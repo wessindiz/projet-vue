@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO DO LIST</title>
+    <style>
+        body{
+            background-color: rgb(38, 37, 41);
+            color: honeydew;
+        }
+        h1{
+            text-align: center;
+            font-weight: bold;
+            color: white;
+        }
+        input{
+            width: 90%;
+            height: 2.5em;
+        }
+        
+        button{
+            font-size: 1.5em;
+            width: 90%;
+        }
+        .remove{
+            font-size: 10px;
+            width: 50px;
+            height: 40px;
+            border-radius: 2em;
+            
+        }
+        .todolist{
+            margin-top: 2em;
+            border: 2px solid grey;
+            width: 90%;
+            height: 2.5em;
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.5em;
+            align-items: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="monapp">
+        <h1>ToDo App</h1>
+        <br>
+        <div>
+            <label>New ToDo</label>
+            <input type="text" v-model="newTodo" v-on:keyup.enter="pushTodo(newTodo)">
+        </div>
+        <button v-on:click="pushTodo(newTodo)" >Add ToDo</button>
+        <br>
+        <p>ToDo List</p>
+        <hr>
+        <div class="todolist" v-for="(toDo,index) in myArray" :key="toDo"> {{toDo}}
+            <button class="remove" v-on:click="supp(index)">remove</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#monapp',
+            data:{
+                newTodo:"",
+                myArray:[],
+            },
+            methods:{
+                pushTodo:function(newTodo){
+                    if(newTodo==""){
+                        alert("Please add a New Todo!");    
+                    }
+                    else{
+                        this.myArray.push(newTodo);
+                    }
+                },
+                supp:function(index){
+                    this.myArray.splice(index,1);
+                }
+            }
+        })
+    </script>
+</body>
+</html>
+      
